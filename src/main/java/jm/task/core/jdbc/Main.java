@@ -10,6 +10,8 @@ public class Main {
     public static void main(String[] args) {
         UserDaoJDBCImpl dao = new UserDaoJDBCImpl();
 
+        dao.setManualCommit();
+
         dao.createUsersTable();
 
         List<User> users = new ArrayList<>();
@@ -29,5 +31,7 @@ public class Main {
 
         dao.cleanUsersTable();
         dao.dropUsersTable();
+
+        dao.commit();
     }
 }

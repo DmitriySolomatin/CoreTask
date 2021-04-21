@@ -85,10 +85,10 @@ public class UserDaoJDBCImpl implements UserDao {
                 String lastName = rs.getString("lastName");
                 byte age = rs.getByte("age");
 
-                //Assuming you have a user object
                 User user = new User(id, name, lastName, age);
                 userList.add(user);
             }
+            rs.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -102,6 +102,24 @@ public class UserDaoJDBCImpl implements UserDao {
             statement.execute(sql);
         } catch (SQLException e) {
             System.out.println(e);
+        }
+    }
+
+    public void setManualCommit() {
+        try {
+            connection.setAutoCommit(false);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void commit()  {
+        if (connection != null) {
+            try {
+                connection.commit();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 

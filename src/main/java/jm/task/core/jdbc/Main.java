@@ -1,21 +1,33 @@
 package jm.task.core.jdbc;
 
-import jm.task.core.jdbc.dao.UserDao;
 import jm.task.core.jdbc.dao.UserDaoJDBCImpl;
-import jm.task.core.jdbc.util.Util;
+import jm.task.core.jdbc.model.User;
 
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
         UserDaoJDBCImpl dao = new UserDaoJDBCImpl();
-//        dao.dropUsersTable();
-//        dao.createUsersTable();
-//
-//        dao.cleanUsersTable();
-        dao.saveUser("Тест", "Тестович", (byte) 33);
+
+        dao.createUsersTable();
+
+        List<User> users = new ArrayList<>();
+        users.add(new User("Иван", "Тестович", (byte) 30));
+        users.add(new User("Пётр", "Фестович", (byte) 31));
+        users.add(new User("Кирилл", "Хестович", (byte) 32));
+        users.add(new User("Мефодий", "Цестович", (byte) 33));
+
+        users.stream().forEachOrdered(x -> {
+            dao.saveUser(x.getName(), x.getLastName(), x.getAge());
+            System.out.printf("User с именем – %s добавлен в базу данных\n", x.getName());
+        });
+
+        List<User> currentUsers = new ArrayList<>();
+        currentUsers = dao.getAllUsers();
+        currentUsers.stream().forEachOrdered(System.out::println);
+
+        dao.cleanUsersTable();
+        dao.dropUsersTable();
     }
 }

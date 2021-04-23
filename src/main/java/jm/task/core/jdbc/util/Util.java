@@ -10,6 +10,16 @@ public class Util {
     private static final String USER = "root";
     private static final String PASS = "root";
 
+    private static Util instance;
+
+    private Util() {};
+
+    public static Util getInstance() {
+        if (instance == null) {
+            instance = new Util();
+        }
+        return instance;
+    }
 
     public static Connection getConnection() throws SQLException {
         Connection connection = DriverManager.getConnection(URL, USER, PASS);

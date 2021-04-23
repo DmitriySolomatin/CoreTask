@@ -14,7 +14,8 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public UserDaoJDBCImpl() {
         try {
-            connection = Util.getConnection();
+            Util utilInstance = Util.getInstance();
+            connection = utilInstance.getConnection();
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -24,7 +25,7 @@ public class UserDaoJDBCImpl implements UserDao {
     public void createUsersTable() {
         try {
             statement = connection.createStatement();
-            String sql = "CREATE TABLE users (\n" +
+            String sql = "CREATE TABLE IF NOT EXISTS users (\n" +
                     "  `id` BIGINT(20) NOT NULL AUTO_INCREMENT,\n" +
                     "  `name` VARCHAR(45) NULL,\n" +
                     "  `lastName` VARCHAR(45) NULL,\n" +
@@ -39,7 +40,7 @@ public class UserDaoJDBCImpl implements UserDao {
     public void dropUsersTable() {
         try {
             statement = connection.createStatement();
-            String sql = "DROP TABLE users";
+            String sql = "DROP TABLE IF EXISTS users";
             statement.execute(sql);
         } catch (MySQLSyntaxErrorException e) {
 

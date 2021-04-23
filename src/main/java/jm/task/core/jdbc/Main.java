@@ -31,6 +31,7 @@ public class Main {
 
         dao.cleanUsersTable();
         dao.dropUsersTable();
+        dao.dropUsersTable();
 
         dao.commit();
     }

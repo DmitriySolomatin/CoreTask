@@ -17,7 +17,7 @@ public class UserDaoJDBCImpl implements UserDao {
             Util utilInstance = Util.getInstance();
             connection = utilInstance.getConnection();
         } catch (SQLException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
 
     }
@@ -34,7 +34,7 @@ public class UserDaoJDBCImpl implements UserDao {
             statement.execute(sql);
             statement.close();
         } catch (SQLException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -45,7 +45,7 @@ public class UserDaoJDBCImpl implements UserDao {
             statement.execute(sql);
             statement.close();
         } catch (SQLException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -59,7 +59,7 @@ public class UserDaoJDBCImpl implements UserDao {
             preparedStatement.executeUpdate();
             statement.close();
         } catch (SQLException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -71,7 +71,7 @@ public class UserDaoJDBCImpl implements UserDao {
             preparedStatement.executeUpdate();
             statement.close();
         } catch (SQLException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -94,7 +94,7 @@ public class UserDaoJDBCImpl implements UserDao {
             }
             rs.close();
         } catch (SQLException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
         return userList;
     }
@@ -106,7 +106,7 @@ public class UserDaoJDBCImpl implements UserDao {
             statement.execute(sql);
             statement.close();
         } catch (SQLException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 

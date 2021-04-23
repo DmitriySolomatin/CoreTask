@@ -32,6 +32,7 @@ public class UserDaoJDBCImpl implements UserDao {
                     "  `age` TINYINT(3) NULL,\n" +
                     "  PRIMARY KEY (`id`));";
             statement.execute(sql);
+            statement.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -42,6 +43,7 @@ public class UserDaoJDBCImpl implements UserDao {
             statement = connection.createStatement();
             String sql = "DROP TABLE IF EXISTS users";
             statement.execute(sql);
+            statement.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -55,6 +57,7 @@ public class UserDaoJDBCImpl implements UserDao {
             preparedStatement.setString(2, lastName);
             preparedStatement.setInt(3, age);
             preparedStatement.executeUpdate();
+            statement.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -66,6 +69,7 @@ public class UserDaoJDBCImpl implements UserDao {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
+            statement.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -78,6 +82,7 @@ public class UserDaoJDBCImpl implements UserDao {
             String sql = "SELECT * FROM users";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet rs = preparedStatement.executeQuery();
+            statement.close();
             while (rs.next()) {
                 long id = rs.getInt("id");
                 String name = rs.getString("name");
@@ -99,6 +104,7 @@ public class UserDaoJDBCImpl implements UserDao {
             statement = connection.createStatement();
             String sql = "TRUNCATE TABLE users";
             statement.execute(sql);
+            statement.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -116,6 +122,16 @@ public class UserDaoJDBCImpl implements UserDao {
         if (connection != null) {
             try {
                 connection.commit();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void close() {
+        if (connection != null) {
+            try {
+                connection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }

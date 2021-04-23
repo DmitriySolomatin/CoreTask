@@ -42,8 +42,6 @@ public class UserDaoJDBCImpl implements UserDao {
             statement = connection.createStatement();
             String sql = "DROP TABLE IF EXISTS users";
             statement.execute(sql);
-        } catch (MySQLSyntaxErrorException e) {
-
         } catch (SQLException e) {
             System.out.println(e);
         }

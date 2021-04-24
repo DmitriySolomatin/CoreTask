@@ -17,6 +17,8 @@ public class Util {
 
     private static SessionFactory sessionFactory;
 
+    private static Connection connection = null;
+
     private static Util instance;
 
     private Util() {};
@@ -29,7 +31,9 @@ public class Util {
     }
 
     public static Connection getConnection() throws SQLException {
-        Connection connection = DriverManager.getConnection(URL, USER, PASS);
+        if (connection == null) {
+            connection = DriverManager.getConnection(URL, USER, PASS);
+        }
         return connection;
     }
 

@@ -40,26 +40,23 @@ public class Util {
 
     public static SessionFactory getSessionFactory() throws Exception {
         if (sessionFactory == null) {
-            try {
-                Properties hibernateConfig = new Properties();
-                hibernateConfig.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/new_schema");
-                hibernateConfig.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
-                hibernateConfig.setProperty("hibernate.connection.username", "root");
-                hibernateConfig.setProperty("hibernate.connection.password", "root");
-                hibernateConfig.setProperty("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
-                hibernateConfig.setProperty("show_sql", "true");
+            Properties hibernateConfig = new Properties();
+            hibernateConfig.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/new_schema");
+            hibernateConfig.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
+            hibernateConfig.setProperty("hibernate.connection.username", "root");
+            hibernateConfig.setProperty("hibernate.connection.password", "root");
+            hibernateConfig.setProperty("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
+            hibernateConfig.setProperty("show_sql", "true");
 
-                Configuration configuration = new Configuration();
-                configuration.setProperties(hibernateConfig);
-                configuration.addAnnotatedClass(User.class);
+            Configuration configuration = new Configuration();
+            configuration.setProperties(hibernateConfig);
+            configuration.addAnnotatedClass(User.class);
 
-                serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
-                        configuration.getProperties()).build();
+            serviceRegistry = new StandardServiceRegistryBuilder()
+                    .applySettings(configuration.getProperties())
+                    .build();
 
-                sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            sessionFactory = configuration.buildSessionFactory(serviceRegistry);
         }
         return sessionFactory;
     }

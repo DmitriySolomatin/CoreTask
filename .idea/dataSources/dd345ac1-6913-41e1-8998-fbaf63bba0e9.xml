@@ -1293,5 +1293,29 @@
     <user id="339" parent="1" name="root">
       <Host>localhost</Host>
     </user>
+    <table id="340" parent="7" name="users"/>
+    <column id="341" parent="340" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="342" parent="340" name="name">
+      <Position>2</Position>
+      <DataType>varchar(45)|0s</DataType>
+    </column>
+    <column id="343" parent="340" name="lastName">
+      <Position>3</Position>
+      <DataType>varchar(45)|0s</DataType>
+    </column>
+    <column id="344" parent="340" name="age">
+      <Position>4</Position>
+      <DataType>tinyint(3)|0s</DataType>
+    </column>
+    <key id="345" parent="340" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
   </database-model>
 </dataSource>

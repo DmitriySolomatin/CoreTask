@@ -33,11 +33,6 @@ public class Util {
         return instance;
     }
 
-    public static Connection getConnection() throws SQLException {
-        Connection connection = DriverManager.getConnection(URL, USER, PASS);
-        return connection;
-    }
-
     public static SessionFactory getSessionFactory() throws Exception {
         if (sessionFactory == null) {
             Properties hibernateConfig = new Properties();

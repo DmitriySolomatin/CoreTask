@@ -1,18 +1,17 @@
 package jm.task.core.jdbc;
 
-import jm.task.core.jdbc.dao.UserDaoJDBCImpl;
 import jm.task.core.jdbc.model.User;
+import jm.task.core.jdbc.service.UserService;
+import jm.task.core.jdbc.service.UserServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        UserDaoJDBCImpl dao = new UserDaoJDBCImpl();
+        UserService service = new UserServiceImpl();
 
-        dao.setManualCommit();
-
-        dao.createUsersTable();
+        service.createUsersTable();
 
         List<User> users = new ArrayList<>();
         users.add(new User("Иван", "Тестович", (byte) 30));
@@ -21,17 +20,16 @@ public class Main {
         users.add(new User("Мефодий", "Цестович", (byte) 33));
 
         users.stream().forEachOrdered(x -> {
-            dao.saveUser(x.getName(), x.getLastName(), x.getAge());
+            service.saveUser(x.getName(), x.getLastName(), x.getAge());
             System.out.printf("User с именем – %s добавлен в базу данных\n", x.getName());
         });
 
         List<User> currentUsers = new ArrayList<>();
-        currentUsers = dao.getAllUsers();
+        currentUsers = service.getAllUsers();
         currentUsers.stream().forEachOrdered(System.out::println);
 
-        dao.cleanUsersTable();
-        dao.dropUsersTable();
+        service.cleanUsersTable();
+        service.dropUsersTable();
 
-        dao.commit();
     }
 }
